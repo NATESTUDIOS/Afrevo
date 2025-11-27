@@ -3,324 +3,614 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Afrevo AI - Your Smart Business Assistant</title>
+    <title>Afrevo AI | Your Smart Business Assistant</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* Global Styles */
+        /* CSS Variables for Consistent Design System */
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --secondary: #7c3aed;
+            --accent: #06d6a0;
+            --text-dark: #1e293b;
+            --text-light: #64748b;
+            --bg-light: #f8fafc;
+            --bg-white: #ffffff;
+            --border: #e2e8f0;
+            --shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 20px 50px -12px rgba(0, 0, 0, 0.15);
+            --radius: 12px;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* Base Styles */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-        
-        :root {
-            --primary: #2A5C8D;
-            --secondary: #F9B233;
-            --accent: #2E8B57;
-            --light: #F5F7FA;
-            --dark: #333333;
-            --text: #444444;
+
+        html {
+            scroll-behavior: smooth;
         }
-        
+
         body {
-            color: var(--text);
+            font-family: 'Inter', sans-serif;
+            color: var(--text-dark);
             line-height: 1.6;
-            background-color: var(--light);
+            overflow-x: hidden;
+            background-color: var(--bg-white);
         }
-        
+
         .container {
-            width: 90%;
+            width: 100%;
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 20px;
+            padding: 0 24px;
         }
-        
+
         section {
-            padding: 80px 0;
+            padding: 100px 0;
         }
-        
-        h1, h2, h3, h4 {
-            color: var(--dark);
-            margin-bottom: 20px;
-        }
-        
-        h1 {
-            font-size: 2.8rem;
+
+        h1, h2, h3, h4, h5 {
+            font-weight: 700;
             line-height: 1.2;
+            margin-bottom: 1.5rem;
         }
-        
+
+        h1 {
+            font-size: 3.5rem;
+            letter-spacing: -0.02em;
+        }
+
         h2 {
-            font-size: 2.2rem;
+            font-size: 2.5rem;
             text-align: center;
-            margin-bottom: 50px;
-            position: relative;
+            margin-bottom: 3rem;
         }
-        
-        h2:after {
-            content: '';
-            position: absolute;
-            bottom: -15px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80px;
-            height: 4px;
-            background-color: var(--secondary);
+
+        h3 {
+            font-size: 1.5rem;
         }
-        
+
         p {
-            margin-bottom: 20px;
-            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            color: var(--text-light);
+            font-size: 1.125rem;
         }
-        
+
         .btn {
-            display: inline-block;
-            padding: 14px 32px;
-            background-color: var(--primary);
-            color: white;
-            border: none;
-            border-radius: 5px;
-            font-size: 1.1rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 16px 32px;
             font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
+            font-size: 1rem;
+            border-radius: var(--radius);
             text-decoration: none;
+            transition: var(--transition);
+            cursor: pointer;
+            border: none;
+            gap: 8px;
         }
-        
-        .btn:hover {
-            background-color: var(--accent);
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+            box-shadow: var(--shadow);
         }
-        
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
         .btn-secondary {
-            background-color: var(--secondary);
-            color: var(--dark);
+            background: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
         }
-        
+
+        .btn-secondary:hover {
+            background: rgba(37, 99, 235, 0.05);
+            transform: translateY(-2px);
+        }
+
+        .section-header {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 4rem;
+        }
+
+        .section-subtitle {
+            font-size: 1.125rem;
+            color: var(--text-light);
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            font-weight: 600;
+        }
+
         /* Header Styles */
         header {
-            background-color: white;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
             position: fixed;
-            width: 100%;
             top: 0;
+            left: 0;
+            width: 100%;
             z-index: 1000;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(226, 232, 240, 0.5);
+            transition: var(--transition);
         }
-        
+
         .header-container {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 20px 0;
+            padding: 20px 24px;
         }
-        
+
         .logo {
-            font-size: 1.8rem;
+            font-size: 1.75rem;
             font-weight: 700;
             color: var(--primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
-        
+
         .logo span {
             color: var(--secondary);
         }
-        
+
         nav ul {
             display: flex;
             list-style: none;
+            gap: 2rem;
         }
-        
-        nav ul li {
-            margin-left: 30px;
-        }
-        
-        nav ul li a {
+
+        nav a {
             text-decoration: none;
-            color: var(--dark);
+            color: var(--text-dark);
             font-weight: 500;
-            transition: color 0.3s ease;
+            transition: var(--transition);
+            position: relative;
         }
-        
-        nav ul li a:hover {
+
+        nav a:hover {
             color: var(--primary);
         }
-        
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: var(--transition);
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
         .mobile-menu {
             display: none;
+            background: none;
+            border: none;
             font-size: 1.5rem;
             cursor: pointer;
+            color: var(--text-dark);
         }
-        
+
         /* Hero Section */
         .hero {
-            background: linear-gradient(135deg, var(--primary) 0%, #1a3a5a 100%);
-            color: white;
-            padding: 160px 0 100px;
-            text-align: center;
+            padding: 180px 0 120px;
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 50%, #f0fdf4 100%);
+            position: relative;
+            overflow: hidden;
         }
-        
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 50%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 Z" fill="%232563eb" opacity="0.03"/></svg>');
+            background-size: cover;
+        }
+
+        .hero-content {
+            max-width: 600px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            background: rgba(37, 99, 235, 0.1);
+            color: var(--primary);
+            padding: 8px 16px;
+            border-radius: 50px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+        }
+
         .hero h1 {
-            color: white;
-            margin-bottom: 25px;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
-        
+
         .hero p {
-            font-size: 1.3rem;
-            max-width: 700px;
-            margin: 0 auto 40px;
+            font-size: 1.25rem;
+            margin-bottom: 2.5rem;
+            color: var(--text-light);
         }
-        
+
         .hero-btns {
             display: flex;
-            justify-content: center;
-            gap: 20px;
+            gap: 1rem;
+            flex-wrap: wrap;
         }
-        
+
         /* Features Section */
+        .features {
+            background: var(--bg-white);
+        }
+
         .features-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
+            gap: 2rem;
         }
-        
+
         .feature-card {
-            background-color: white;
-            border-radius: 10px;
-            padding: 30px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-            transition: transform 0.3s ease;
+            background: var(--bg-white);
+            border-radius: var(--radius);
+            padding: 2.5rem;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            border: 1px solid var(--border);
+            position: relative;
+            overflow: hidden;
         }
-        
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(to bottom, var(--primary), var(--secondary));
+            transition: var(--transition);
+        }
+
         .feature-card:hover {
             transform: translateY(-10px);
+            box-shadow: var(--shadow-lg);
         }
-        
+
+        .feature-card:hover::before {
+            width: 8px;
+        }
+
         .feature-icon {
-            font-size: 2.5rem;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(37, 99, 235, 0.1);
             color: var(--primary);
-            margin-bottom: 20px;
-        }
-        
-        .feature-card h3 {
+            border-radius: 12px;
             font-size: 1.5rem;
-            margin-bottom: 15px;
+            margin-bottom: 1.5rem;
         }
-        
+
+        .feature-card h3 {
+            margin-bottom: 1rem;
+        }
+
+        .feature-list {
+            list-style: none;
+        }
+
+        .feature-list li {
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .feature-list li::before {
+            content: '✓';
+            color: var(--accent);
+            font-weight: bold;
+        }
+
         /* How It Works */
         .how-it-works {
-            background-color: white;
+            background: var(--bg-light);
         }
-        
+
         .steps {
             display: flex;
             justify-content: space-between;
             flex-wrap: wrap;
-            gap: 20px;
+            gap: 2rem;
+            position: relative;
         }
-        
+
+        .steps::before {
+            content: '';
+            position: absolute;
+            top: 60px;
+            left: 10%;
+            right: 10%;
+            height: 2px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            z-index: 0;
+        }
+
         .step {
             flex: 1;
-            min-width: 250px;
+            min-width: 200px;
             text-align: center;
-            padding: 30px 20px;
+            padding: 2rem 1rem;
+            position: relative;
+            z-index: 1;
         }
-        
+
         .step-number {
-            display: inline-block;
-            width: 50px;
-            height: 50px;
-            background-color: var(--primary);
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
             color: white;
             border-radius: 50%;
-            line-height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             font-size: 1.5rem;
-            font-weight: bold;
-            margin-bottom: 20px;
+            font-weight: 700;
+            margin: 0 auto 1.5rem;
+            box-shadow: var(--shadow);
         }
-        
+
         /* Target Audience */
+        .audience {
+            background: var(--bg-white);
+        }
+
         .audience-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
+            gap: 1.5rem;
         }
-        
+
         .audience-item {
-            background-color: white;
-            padding: 20px;
-            border-radius: 8px;
+            background: var(--bg-white);
+            padding: 1.5rem;
+            border-radius: var(--radius);
             text-align: center;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            border: 1px solid var(--border);
         }
-        
+
+        .audience-item:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--primary);
+        }
+
+        /* Testimonials */
+        .testimonials {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+        }
+
+        .testimonials h2 {
+            color: white;
+        }
+
+        .testimonials .section-subtitle {
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .testimonial-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: var(--radius);
+            padding: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 1.5rem;
+            color: white;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        .author-info h4 {
+            margin-bottom: 0.25rem;
+            color: white;
+        }
+
+        .author-info p {
+            margin: 0;
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.875rem;
+        }
+
         /* CTA Section */
         .cta {
-            background: linear-gradient(135deg, var(--primary) 0%, #1a3a5a 100%);
-            color: white;
+            background: var(--bg-light);
             text-align: center;
-            padding: 100px 0;
         }
-        
-        .cta h2 {
-            color: white;
-        }
-        
-        .cta h2:after {
-            background-color: var(--secondary);
-        }
-        
-        .cta p {
+
+        .cta-container {
             max-width: 700px;
-            margin: 0 auto 40px;
-            font-size: 1.2rem;
+            margin: 0 auto;
+            background: var(--bg-white);
+            padding: 4rem;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
         }
-        
+
+        .cta h2 {
+            margin-bottom: 1.5rem;
+        }
+
+        .cta p {
+            margin-bottom: 2.5rem;
+        }
+
         /* Footer */
         footer {
-            background-color: var(--dark);
+            background: var(--text-dark);
             color: white;
             padding: 60px 0 30px;
         }
-        
+
         .footer-content {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 40px;
-            margin-bottom: 40px;
+            gap: 3rem;
+            margin-bottom: 3rem;
         }
-        
+
         .footer-column h3 {
             color: white;
-            margin-bottom: 25px;
-            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            font-size: 1.25rem;
         }
-        
+
         .footer-column ul {
             list-style: none;
         }
-        
+
         .footer-column ul li {
-            margin-bottom: 10px;
+            margin-bottom: 0.75rem;
         }
-        
+
         .footer-column ul li a {
-            color: #ccc;
+            color: rgba(255, 255, 255, 0.7);
             text-decoration: none;
-            transition: color 0.3s ease;
+            transition: var(--transition);
         }
-        
+
         .footer-column ul li a:hover {
-            color: var(--secondary);
+            color: white;
         }
-        
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .social-links a:hover {
+            background: var(--primary);
+            transform: translateY(-3px);
+        }
+
         .copyright {
             text-align: center;
-            padding-top: 30px;
-            border-top: 1px solid rgba(255,255,255,0.1);
-            color: #aaa;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.875rem;
         }
-        
+
+        /* Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
         /* Responsive Styles */
+        @media (max-width: 1024px) {
+            h1 {
+                font-size: 3rem;
+            }
+            
+            h2 {
+                font-size: 2.25rem;
+            }
+        }
+
         @media (max-width: 768px) {
+            section {
+                padding: 80px 0;
+            }
+            
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            h2 {
+                font-size: 2rem;
+            }
+            
             .mobile-menu {
                 display: block;
             }
@@ -328,13 +618,14 @@
             nav ul {
                 display: none;
                 position: absolute;
-                top: 80px;
+                top: 100%;
                 left: 0;
                 width: 100%;
-                background-color: white;
+                background: var(--bg-white);
                 flex-direction: column;
-                padding: 20px;
-                box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+                padding: 1rem 0;
+                box-shadow: var(--shadow);
+                border-top: 1px solid var(--border);
             }
             
             nav ul.show {
@@ -342,26 +633,35 @@
             }
             
             nav ul li {
-                margin: 10px 0;
-            }
-            
-            h1 {
-                font-size: 2.2rem;
-            }
-            
-            h2 {
-                font-size: 1.8rem;
+                margin: 0;
+                padding: 0.75rem 2rem;
             }
             
             .hero-btns {
                 flex-direction: column;
-                align-items: center;
+                align-items: flex-start;
             }
             
-            .btn {
-                width: 100%;
-                max-width: 300px;
-                margin-bottom: 10px;
+            .steps::before {
+                display: none;
+            }
+            
+            .cta-container {
+                padding: 2.5rem 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            h2 {
+                font-size: 1.75rem;
+            }
+            
+            .feature-card, .testimonial-card {
+                padding: 1.5rem;
             }
         }
     </style>
@@ -370,14 +670,20 @@
     <!-- Header -->
     <header>
         <div class="container header-container">
-            <div class="logo">Afrevo<span>AI</span></div>
-            <div class="mobile-menu">☰</div>
+            <a href="#" class="logo">
+                <i class="fas fa-robot"></i>
+                Afrevo<span>AI</span>
+            </a>
+            <button class="mobile-menu">
+                <i class="fas fa-bars"></i>
+            </button>
             <nav>
                 <ul>
                     <li><a href="#features">Features</a></li>
                     <li><a href="#how-it-works">How It Works</a></li>
                     <li><a href="#audience">Who It's For</a></li>
-                    <li><a href="#cta">Get Started</a></li>
+                    <li><a href="#testimonials">Testimonials</a></li>
+                    <li><a href="#cta" class="btn btn-primary">Get Started</a></li>
                 </ul>
             </nav>
         </div>
@@ -386,11 +692,23 @@
     <!-- Hero Section -->
     <section class="hero">
         <div class="container">
-            <h1>Your Smart Business Assistant</h1>
-            <p>Afrevo AI helps business owners and entrepreneurs run and grow their business - even with no experience. It's like having a personal business expert, marketing team, and customer support assistant all in one app.</p>
-            <div class="hero-btns">
-                <a href="#cta" class="btn">Start Free Trial</a>
-                <a href="#features" class="btn btn-secondary">Learn More</a>
+            <div class="hero-content">
+                <div class="hero-badge">
+                    <i class="fas fa-star"></i>
+                    AI-Powered Business Assistant
+                </div>
+                <h1>Run and Grow Your Business with AI</h1>
+                <p>Afrevo AI is your personal business expert, marketing team, and customer support assistant — all in one powerful app. Start, manage, and scale your business even with no experience.</p>
+                <div class="hero-btns">
+                    <a href="#cta" class="btn btn-primary">
+                        <i class="fas fa-rocket"></i>
+                        Start Free Trial
+                    </a>
+                    <a href="#features" class="btn btn-secondary">
+                        <i class="fas fa-play-circle"></i>
+                        See How It Works
+                    </a>
+                </div>
             </div>
         </div>
     </section>
@@ -398,32 +716,76 @@
     <!-- Features Section -->
     <section id="features" class="features">
         <div class="container">
-            <h2>What Afrevo AI Helps You Do</h2>
+            <div class="section-header">
+                <div class="section-subtitle">Powerful Features</div>
+                <h2>What Afrevo AI Helps You Do</h2>
+                <p>From content creation to customer management, Afrevo AI handles the complex tasks so you can focus on growing your business.</p>
+            </div>
             <div class="features-grid">
-                <div class="feature-card">
-                    <div class="feature-icon">📝</div>
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">
+                        <i class="fas fa-pen-fancy"></i>
+                    </div>
                     <h3>Create Business Content Instantly</h3>
-                    <p>Automatically generate social media posts, captions, flyers, ads, logos, business names, and product descriptions.</p>
+                    <p>Generate professional content in seconds with our AI-powered tools:</p>
+                    <ul class="feature-list">
+                        <li>Social media posts & captions</li>
+                        <li>Flyers & advertisements</li>
+                        <li>Logos & business names</li>
+                        <li>Product descriptions</li>
+                    </ul>
                 </div>
-                <div class="feature-card">
-                    <div class="feature-icon">💬</div>
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">
+                        <i class="fas fa-comments"></i>
+                    </div>
                     <h3>Reply to Customers Automatically</h3>
-                    <p>Answer customer messages, respond to complaints, handle FAQs, and give professional replies 24/7.</p>
+                    <p>Never miss a customer interaction with 24/7 automated support:</p>
+                    <ul class="feature-list">
+                        <li>Answer customer messages</li>
+                        <li>Respond to complaints</li>
+                        <li>Handle frequently asked questions</li>
+                        <li>Give professional replies</li>
+                    </ul>
                 </div>
-                <div class="feature-card">
-                    <div class="feature-icon">💡</div>
-                    <h3>Get Business Advice</h3>
-                    <p>Receive pricing suggestions, marketing ideas, growth strategies, and steps to start or scale your business.</p>
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">
+                        <i class="fas fa-lightbulb"></i>
+                    </div>
+                    <h3>Get Expert Business Advice</h3>
+                    <p>Make informed decisions with AI-powered insights and guidance:</p>
+                    <ul class="feature-list">
+                        <li>Pricing suggestions</li>
+                        <li>Marketing ideas</li>
+                        <li>Growth strategies</li>
+                        <li>Steps to start or scale</li>
+                    </ul>
                 </div>
-                <div class="feature-card">
-                    <div class="feature-icon">📊</div>
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">
+                        <i class="fas fa-tasks"></i>
+                    </div>
                     <h3>Manage Your Business in One Place</h3>
-                    <p>Track orders, save customer details, plan your day, set reminders, and organize tasks efficiently.</p>
+                    <p>Streamline operations with all your business tools in one dashboard:</p>
+                    <ul class="feature-list">
+                        <li>Track orders & inventory</li>
+                        <li>Save customer details</li>
+                        <li>Plan your day & set reminders</li>
+                        <li>Organize tasks efficiently</li>
+                    </ul>
                 </div>
-                <div class="feature-card">
-                    <div class="feature-icon">👥</div>
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
                     <h3>Connect With Other Entrepreneurs</h3>
-                    <p>Chat with other business owners, share ideas, ask questions, collaborate, and grow together in our built-in community.</p>
+                    <p>Join a thriving community of business owners to learn and grow together:</p>
+                    <ul class="feature-list">
+                        <li>Chat with other business owners</li>
+                        <li>Share ideas & ask questions</li>
+                        <li>Collaborate on projects</li>
+                        <li>Learn from collective experience</li>
+                    </ul>
                 </div>
             </div>
         </div>
@@ -432,24 +794,28 @@
     <!-- How It Works -->
     <section id="how-it-works" class="how-it-works">
         <div class="container">
-            <h2>How Afrevo AI Works</h2>
+            <div class="section-header">
+                <div class="section-subtitle">Simple Process</div>
+                <h2>How Afrevo AI Works</h2>
+                <p>Getting started with Afrevo AI takes just minutes, with no technical skills required.</p>
+            </div>
             <div class="steps">
-                <div class="step">
+                <div class="step fade-in">
                     <div class="step-number">1</div>
                     <h3>Sign Up</h3>
-                    <p>Create your account in minutes with no technical skills required.</p>
+                    <p>Create your account in minutes with our simple onboarding process.</p>
                 </div>
-                <div class="step">
+                <div class="step fade-in">
                     <div class="step-number">2</div>
                     <h3>Set Up Your Business</h3>
                     <p>Tell Afrevo AI about your business, goals, and preferences.</p>
                 </div>
-                <div class="step">
+                <div class="step fade-in">
                     <div class="step-number">3</div>
                     <h3>Get AI Assistance</h3>
-                    <p>Start using Afrevo AI to handle tasks, create content, and grow your business.</p>
+                    <p>Start using Afrevo AI to handle tasks, create content, and engage customers.</p>
                 </div>
-                <div class="step">
+                <div class="step fade-in">
                     <div class="step-number">4</div>
                     <h3>Scale Your Business</h3>
                     <p>Watch your business grow with expert guidance and automation.</p>
@@ -461,43 +827,68 @@
     <!-- Target Audience -->
     <section id="audience" class="audience">
         <div class="container">
-            <h2>Who Afrevo AI Is Made For</h2>
-            <div class="audience-grid">
-                <div class="audience-item">Small Business Owners</div>
-                <div class="audience-item">Students Running a Hustle</div>
-                <div class="audience-item">Fashion Vendors</div>
-                <div class="audience-item">Hair & Beauty Businesses</div>
-                <div class="audience-item">Food Sellers</div>
-                <div class="audience-item">Online Stores</div>
-                <div class="audience-item">Freelancers</div>
-                <div class="audience-item">Startups</div>
+            <div class="section-header">
+                <div class="section-subtitle">Perfect For</div>
+                <h2>Who Afrevo AI Is Made For</h2>
+                <p>Afrevo AI is designed for entrepreneurs at every stage, from idea to growth.</p>
             </div>
-            <p style="text-align: center; margin-top: 30px;">Anyone who wants to start, run, or grow a business easily.</p>
+            <div class="audience-grid">
+                <div class="audience-item fade-in">Small Business Owners</div>
+                <div class="audience-item fade-in">Students Running a Hustle</div>
+                <div class="audience-item fade-in">Fashion Vendors</div>
+                <div class="audience-item fade-in">Hair & Beauty Businesses</div>
+                <div class="audience-item fade-in">Food Sellers</div>
+                <div class="audience-item fade-in">Online Stores</div>
+                <div class="audience-item fade-in">Freelancers</div>
+                <div class="audience-item fade-in">Startups</div>
+            </div>
+            <p style="text-align: center; margin-top: 2rem;">Anyone who wants to start, run, or grow a business easily.</p>
         </div>
     </section>
 
-    <!-- Why Different -->
-    <section class="different">
+    <!-- Testimonials -->
+    <section id="testimonials" class="testimonials">
         <div class="container">
-            <h2>Why Afrevo AI Is Different</h2>
-            <div style="max-width: 800px; margin: 0 auto; text-align: center;">
-                <p>Unlike regular AI apps, Afrevo AI is specifically designed for the unique needs of entrepreneurs, with a focus on accessibility and local business understanding.</p>
-                <div style="display: flex; justify-content: center; flex-wrap: wrap; gap: 20px; margin-top: 40px;">
-                    <div style="background-color: white; padding: 20px; border-radius: 8px; width: 200px; box-shadow: 0 3px 10px rgba(0,0,0,0.05);">
-                        <h4>Easy to Use</h4>
-                        <p>No technical skills required</p>
+            <div class="section-header">
+                <div class="section-subtitle">Success Stories</div>
+                <h2>What Our Users Say</h2>
+                <p>Hear from entrepreneurs who have transformed their businesses with Afrevo AI.</p>
+            </div>
+            <div class="testimonials-grid">
+                <div class="testimonial-card fade-in">
+                    <div class="testimonial-text">
+                        "Afrevo AI helped me launch my fashion boutique in just two weeks. The content creation tools saved me hours each day, and the customer response automation doubled my sales!"
                     </div>
-                    <div style="background-color: white; padding: 20px; border-radius: 8px; width: 200px; box-shadow: 0 3px 10px rgba(0,0,0,0.05);">
-                        <h4>Affordable</h4>
-                        <p>Priced for growing businesses</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">AO</div>
+                        <div class="author-info">
+                            <h4>Amara Okeke</h4>
+                            <p>Fashion Entrepreneur, Lagos</p>
+                        </div>
                     </div>
-                    <div style="background-color: white; padding: 20px; border-radius: 8px; width: 200px; box-shadow: 0 3px 10px rgba(0,0,0,0.05);">
-                        <h4>Made for Entrepreneurs</h4>
-                        <p>African and global focus</p>
+                </div>
+                <div class="testimonial-card fade-in">
+                    <div class="testimonial-text">
+                        "As a student running a side business, I don't have much time or experience. Afrevo AI gave me the confidence and tools to manage everything professionally. The community feature is amazing!"
                     </div>
-                    <div style="background-color: white; padding: 20px; border-radius: 8px; width: 200px; box-shadow: 0 3px 10px rgba(0,0,0,0.05);">
-                        <h4>Local Understanding</h4>
-                        <p>Knows your business style</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">DK</div>
+                        <div class="author-info">
+                            <h4>David Kimani</h4>
+                            <p>Student Entrepreneur, Nairobi</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card fade-in">
+                    <div class="testimonial-text">
+                        "I've tried other business apps, but Afrevo AI understands the African market. The pricing suggestions and growth strategies are tailored to our context. My food business has grown 300% in 6 months!"
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">FA</div>
+                        <div class="author-info">
+                            <h4>Fatima Abubakar</h4>
+                            <p>Restaurant Owner, Accra</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -507,9 +898,15 @@
     <!-- CTA Section -->
     <section id="cta" class="cta">
         <div class="container">
-            <h2>Ready to Grow Your Business?</h2>
-            <p>Join thousands of entrepreneurs who are using Afrevo AI to save time, attract more customers, and grow their businesses faster.</p>
-            <a href="#" class="btn btn-secondary">Start Your Free Trial Today</a>
+            <div class="cta-container fade-in">
+                <h2>Ready to Transform Your Business?</h2>
+                <p>Join thousands of entrepreneurs using Afrevo AI to save time, attract more customers, and grow their businesses faster. Start your free trial today.</p>
+                <a href="#" class="btn btn-primary">
+                    <i class="fas fa-rocket"></i>
+                    Start Your Free Trial
+                </a>
+                <p style="margin-top: 1rem; font-size: 0.875rem;">No credit card required. 14-day free trial.</p>
+            </div>
         </div>
     </section>
 
@@ -519,22 +916,37 @@
             <div class="footer-content">
                 <div class="footer-column">
                     <h3>Afrevo AI</h3>
-                    <p>Your smart digital assistant for business growth.</p>
+                    <p>Your smart digital assistant for business growth. Designed for African and global entrepreneurs.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
                 </div>
                 <div class="footer-column">
-                    <h3>Quick Links</h3>
+                    <h3>Product</h3>
                     <ul>
                         <li><a href="#features">Features</a></li>
                         <li><a href="#how-it-works">How It Works</a></li>
                         <li><a href="#audience">Who It's For</a></li>
-                        <li><a href="#cta">Get Started</a></li>
+                        <li><a href="#">Pricing</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Company</h3>
+                    <ul>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Contact</a></li>
                     </ul>
                 </div>
                 <div class="footer-column">
                     <h3>Support</h3>
                     <ul>
                         <li><a href="#">Help Center</a></li>
-                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="#">Community</a></li>
                         <li><a href="#">Privacy Policy</a></li>
                         <li><a href="#">Terms of Service</a></li>
                     </ul>
@@ -551,7 +963,36 @@
         document.querySelector('.mobile-menu').addEventListener('click', function() {
             document.querySelector('nav ul').classList.toggle('show');
         });
-        
+
+        // Scroll animations
+        function checkVisibility() {
+            const elements = document.querySelectorAll('.fade-in');
+            elements.forEach(element => {
+                const position = element.getBoundingClientRect();
+                if (position.top < window.innerHeight - 100) {
+                    element.classList.add('visible');
+                }
+            });
+        }
+
+        // Initial check
+        checkVisibility();
+
+        // Check on scroll
+        window.addEventListener('scroll', checkVisibility);
+
+        // Header scroll effect
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.style.background = 'rgba(255, 255, 255, 0.98)';
+                header.style.boxShadow = '0 5px 20px rgba(0, 0, 0, 0.1)';
+            } else {
+                header.style.background = 'rgba(255, 255, 255, 0.95)';
+                header.style.boxShadow = 'none';
+            }
+        });
+
         // Smooth scrolling for anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
@@ -563,7 +1004,7 @@
                 const targetElement = document.querySelector(targetId);
                 if(targetElement) {
                     window.scrollTo({
-                        top: targetElement.offsetTop - 80,
+                        top: targetElement.offsetTop - 100,
                         behavior: 'smooth'
                     });
                     
